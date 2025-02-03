@@ -1,0 +1,19 @@
+name: Run on PRs with specific labels
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - opened
+      - reopened
+      - synchronize
+
+env:
+  filter_labels: '["foo", "bar"]'
+
+jobs:
+  hello_world:
+    if: contains(fromJSON(env.filter_labels), github.event.pull_request.labels.*.name)
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello World"
