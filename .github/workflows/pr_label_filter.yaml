@@ -8,12 +8,9 @@ on:
       - reopened
       - synchronize
 
-env:
-  filter_labels: '["foo", "bar"]'
-
 jobs:
   hello_world:
-    if: contains(fromJSON(env.filter_labels), github.event.pull_request.labels.*.name)
+    if: contains(fromJSON(vars.filter_labels), github.event.pull_request.labels.*.name)
     runs-on: ubuntu-latest
     steps:
       - run: echo "Hello World"
